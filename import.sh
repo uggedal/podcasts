@@ -1,6 +1,8 @@
 #!/bin/sh
 
-yt-dlp -o "twit_%(episode_number)s.%(ext)s" https://feeds.twit.tv/twit.xml
+yt-dlp -I :3 -o "twit_%(episode_number)s.%(ext)s" https://feeds.twit.tv/twit.xml
+yt-dlp -I :3 -o "%(title)s.%(ext)s" https://latenightlinux.com/feed/mp3
+yt-dlp -I :3 -o "lm_%(episode_number)s.%(ext)s" https://linuxmatters.sh/episode/index.xml
 
 IFS="$(printf '\n')"
 for f in *.mp3; do
