@@ -20,6 +20,14 @@ for f in *.mp3; do
 	fi
 
 	ffmpeg -i $f -af \
-		"atempo=1.5,silenceremove=1:0:-45dB:0:any:-1:0:-45dB:0:any:rms:0.002" \
+		"atempo=1.3,silenceremove=1:0:-45dB:0:any:-1:0:-45dB:0:any:rms:0.002" \
+		-id3v2_version 3 \
 		-n $min
+
+	t=$(id3v2 -l $min | awk '/^TCON/ { print $4 }')
+
+	if [ "$t" != Podcast ]; then
+		id3v2 --TCON Podcast $min
+	fi
+
 done
